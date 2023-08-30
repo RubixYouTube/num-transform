@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Number Transformations</title>
+</head>
+<body>
+    <h1 id="number-heading">0</h1>
+
+    <button id="about-button">About</button>
+
+    <script>
+        let num = 0;
+        let speed = 500;
+        const heading = document.getElementById('number-heading');
+        const aboutButton = document.getElementById('about-button');
+
+        setInterval(updateNumber, speed);
+
+        function updateNumber() {
+            if (num >= 1.79e308) {
+                num = 'e<sub>308</sub>';
+            } else if (num >= 1e308) {
+                num = num.toExponential(2);
+            } else {
+                num += 1;
+            }
+            
+            heading.innerHTML = num;
+
+            if (speed > 10) {
+                speed -= 10;
+                clearInterval();
+                setInterval(updateNumber, speed);
+            }
+        }
+
+        aboutButton.addEventListener('click', showAbout);
+
+        function showAbout() {
+            alert('This page demonstrates number transformations. The number starts from 0 and progressively increases. When it reaches 1.79e308, it turns into e308. If it exceeds 1e308, it is displayed in exponential notation. Additionally, the speed at which the number increases gradually gets faster.');
+        }
+    </script>
+</body>
+</html>
